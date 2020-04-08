@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo</title>
+</head>
+<body>
+    
+    {% block content %}
+        <h1>Hi this is Home :D</h1>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="Submit" name="" id="">
+        </form>  
+
+            <h3>Tasks</h3>
+
+                {% for task in tasks %}
+                    {% if task.complete == True %}
+                        <strike>{{ task }}</strike> <br>
+                        <a href="{% url 'delete' task.pk %}"><input type="Submit" value="Delete"></a> | <a href="{% url 'update' task.pk %}"><input type="Submit" value="Edit"></a> <br> <br>
+                    {% else %}
+                        {{ task }} <br>
+                    <a href="{% url 'delete' task.pk %}"><input type="Submit" value="Delete"></a> | <a href="{% url 'update' task.pk %}"><input type="Submit" value="Edit"></a> <br> <br>
+                    {% endif %}
+                {% endfor %}
+        
+    {% endblock %}
+
+</body>
+</html>
+
